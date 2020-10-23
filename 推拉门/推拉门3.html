@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       body,ul,ol{margin: 0;padding: 0;}
+       li{list-style: none;}
+       img{border: none;vertical-align: top;width: 832px;height: auto;;}
+       #box{width: 832px;height: 504px;position: relative;margin: 30px auto;overflow: hidden;}
+       ul{position: absolute;z-index: 1;}
+       ul li{width: 832px;}
+       ol{z-index: 2;width: 120px;position: absolute;right: 10px;bottom: 10px;}
+       ol li{width: 20px;height: 20px;float: left;background-color: #fff;margin: 0 2px;display: inline;color: #f60;text-align: center;line-height: 20px;}
+       ol .active{background: #f60;color: #fff;}
+    </style>
+    <script type="text/javascript" src="move.js"></script>
+    <script>
+        //图片上滑+自动轮播
+        window.onload=function(){
+            var ul=document.getElementsByTagName("ul")[0];
+            var ulli=ul.getElementsByTagName("li");
+            var ol=document.getElementsByTagName("ol")[0];
+            var olli=ol.getElementsByTagName("li");
+            var oneheight=ulli[0].offsetHeight;
+            var iNow=0;
+            var timer=null;
+            var oBox = document.getElementById("box");
+            for(var i=0;i<olli.length;i++){
+                olli[i].index=i;
+                olli[i].onmouseover=function(){
+                    for(var i=0;i<olli.length;i++){
+                        olli[i].className="";
+                        
+                    }
+                    this.className="active";
+                    iNow=this.index;
+                    startMove(ul,{top:-this.index*oneheight});
+                    
+                }
+            }
+            timer=setInterval(toRun,2000);
+            oBox.onmouseover=function(){
+                clearInterval(timer)
+            }
+            oBox.onmouseout=function(){
+                timer=setInterval(toRun,2000);
+            }
+            function toRun(){
+                if(iNow==olli.length-1){
+                    iNow=0;
+                }else{
+                    iNow++;
+                }
+                for(i=0;i<olli.length-1;i++){
+                    olli[i].className=""
+                }
+                olli[iNow].style="active";
+                startMove(ul,{top:-iNow*oneheight});
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li style="display:block">
+                <img src="D:/img/1.jpg">
+            </li>
+            <li><img src="D:/img/2.jpg"></li>
+            <li><img src="D:/img/3.jpg"></li>
+            <li><img src="D:/img/4.jpg"></li>
+            <li><img src="D:/img/5.jpg"></li>
+        </ul>
+        <ol>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ol>
+    </div>
+</body>
+</html>
