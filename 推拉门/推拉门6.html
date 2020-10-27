@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>妙味课堂-www.miaov.com</title>
+<style>
+       body ul {margin: 0;padding:0}
+       li{list-style: none;}
+       #box{width: 832px;height: 504px;position: relative;margin: 30px auto;vertical-align: top;overflow: hidden;}
+       img{width: 832px;height: auto;}
+       ul{position: relative;z-index: 1;}
+       ul li{width: 832px;position: absolute;top:0;}
+       
+</style>
+<script type="text/javascript" src="move.js"></script>
+<script>
+    //手风琴
+        window.onload = function(){
+            
+            var ul=document.getElementsByTagName('ul');
+            var ulli=document.getElementsByTagName('li');
+            for(let i=1;i<ulli.length;i++){
+                ulli[i].style.left=(832-120)+(i-1)*30+'px';
+            }
+            for(var i=0;i<ulli.length;i++){
+                ulli[i].index=i;
+                ulli[i].onmouseover=function(){
+                    // for(let j=0;j<=i;j++){
+                    //     startMove(ulli[j],{left:j*30})
+                    // }
+                    for(var i=0;i<ulli.length;i++){
+                        if(i<=this.index){
+                            startMove(ulli[i],{left:i*30});
+                        }else{
+                            startMove(ulli[i],{left:(832-120)+(i-1)*30});
+                        }
+                    }
+                }
+            }
+            
+        };
+</script>
+</head>
+<body>
+<div id="box">
+	<ul>
+    	<li><img src="D:/img/1.jpg" alt=""/></li>
+        <li><img src="D:/img/2.jpg" alt=""/></li>
+        <li><img src="D:/img/3.jpg" alt=""/></li>
+        <li><img src="D:/img/4.jpg" alt=""/></li>
+        <li><img src="D:/img/5.jpg" alt=""/></li>
+    </ul>
+   
+</div>
+</body>
+</html>
